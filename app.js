@@ -15,6 +15,30 @@ app.get('/route', function(req, res){
   res.send('<h1>Hello Router</h1> <hr> <img src="/0.png">');  //정적파일 불러오기
 });
 
+app.get('/dynamic', function(req, res){
+  var lis = '';
+  var time = Date();
+  for(var i=0; i<5; i++){
+    lis = lis + '<li>coding</li>';
+  }
+  var output = `<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+    </head>
+    <body>
+        Hello, Dynamic!
+        <hr>
+        <ul>
+        ${lis}
+        <li>${time}</li>
+        </ul>
+    </body>
+  </html>`;
+  res.send(output);
+});
+
 app.listen(3000, function(){
   console.log('Connected 3000 port!');
 });
