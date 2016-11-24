@@ -2,7 +2,13 @@
 
 var express = require('express');
 var app = express();
+app.locals.pretty = true; //템플릿 엔진을 통해 만들어진 html코드를 보기 좋게 만든다.
+app.set('view engine', 'jade'); //템플릿 엔진과 express연결
+app.set('views', './views');  //템플릿 엔진 디렉토리 지정(views가 디폴트임)
 app.use(express.static('public'));  //정적인 파일 위치 지정 (미들웨어?)
+app.get('/template', function(req, res){
+  res.render('temp', {time:new Date(), _title:'Jade 타이틀'}); //jade의 메소드인 render를 이용하여 html 코드 띄우기, {}로 객체 전달하기
+})
 app.get('/', function(request, response){  //get방식, 홈으로 들어온 요청에 대해
   response.send('<h1>홈페이지 에요</h1>');
 });
